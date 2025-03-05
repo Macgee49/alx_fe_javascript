@@ -1,58 +1,46 @@
-document.addEventListener("DOMContentLoaded", function() {
-  // ======================================
-  // 1. Initialize Quotes Array from Local Storage or Defaults
-  // ======================================
-  let quotes = [];
-  const defaultQuotes = [
-    { text: "The only limit to our realization of tomorrow is our doubts of today.", category: "Motivation" },
-    { text: "Life is what happens when you're busy making other plans.", category: "Life" },
-    { text: "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.", category: "Inspiration" }
-  ];
+// Array of quote objects, each with a text and a category
+const quotes = [
+  { text: "The journey of a thousand miles begins with one step.", category: "Motivation" },
+  { text: "Life is what happens when you're busy making other plans.", category: "Life" },
+  { text: "When you reach the end of your rope, tie a knot in it and hang on.", category: "Perseverance" }
+];
 
-  if (localStorage.getItem("quotes")) {
-    try {
-      quotes = JSON.parse(localStorage.getItem("quotes"));
-    } catch (e) {
-      quotes = defaultQuotes;
-      localStorage.setItem("quotes", JSON.stringify(quotes));
-    }
-  } else {
-    quotes = defaultQuotes;
-    localStorage.setItem("quotes", JSON.stringify(quotes));
+// Function to display a random quote from the quotes array
+function showRandomQuote() {
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  const quote = quotes[randomIndex];
+
+  // Get the quote display container and update its content
+  const quoteDisplay = document.getElementById('quoteDisplay');
+  quoteDisplay.innerHTML = `<p><strong>${quote.category}:</strong> ${quote.text}</p>`;
+}
+
+// Function to add a new quote from the form input
+function addQuote() {
+  // Retrieve the input values
+  const quoteText = document.getElementById('newQuoteText').value;
+  const quoteCategory = document.getElementById('newQuoteCategory').value;
+
+  // Validate the inputs
+  if (quoteText.trim() === '' || quoteCategory.trim() === '') {
+    alert("Both fields are required.");
+    return;
   }
 
-  // Save quotes array to local storage
-  function saveQuotes() {
-    localStorage.setItem("quotes", JSON.stringify(quotes));
-  }
+  // Add the new quote to the quotes array
+  quotes.push({ text: quoteText, category: quoteCategory });
 
-  // ======================================
-  // 2. Display a Random Quote and Store in Session Storage
-  // ======================================
-  function displayRandomQuote() {
-    const quoteDisplay = document.getElementById("quoteDisplay");
-    if (!quoteDisplay) return;
+  // Clear the input fields after adding the quote
+  document.getElementById('newQuoteText').value = '';
+  document.getElementById('newQuoteCategory').value = '';
 
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    const selectedQuote = quotes[randomIndex];
+  // Optional: Provide feedback and update the display
+  alert("New quote added successfully!");
+  showRandomQuote();  // Optionally display the newly added quote immediately
+}
 
-    // Update the DOM with the selected quote and its category
-    quoteDisplay.innerHTML = `
-      <p>"${selectedQuote.text}"</p>
-      <p><em>${selectedQuote.category}</em></p>
-    `;
+// Wire up the "Show New Quote" button to display a random quote when clicked
+document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 
-    // Store the last viewed quote in session storage
-    sessionStorage.setItem("lastViewedQuote", JSON.stringify(selectedQuote));
-  }
-
-  // ======================================
-  // 3. Add a New Quote and Update DOM & Local Storage
-  // ======================================
-  function addQuote() {
-    const quoteInput = document.getElementById("newQuoteText");
-    const categoryInput = document.getElementById("newQuoteCategory");
-    if (!quoteInput || !categoryInput) return;
-
-    const newQuoteText = quoteInput.value.trim();
-    const newQuoteCategory = categoryInput.va
+// Optionally, display an initial random quote when the page loads
+showRandomQuote();
