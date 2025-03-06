@@ -1,51 +1,62 @@
-body {
-  font-family: Arial, sans-serif;
+/* Basic Reset */
+* {
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #f0f0f0;
+  box-sizing: border-box;
 }
 
-h1 {
+/* Body styling */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
   color: #333;
-}
-
-#quoteDisplay {
-  margin: 20px 0;
   padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Header styling */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+/* Quote display container */
+#quoteDisplay {
+  background: #fff;
+  border: 2px solid #ddd;
+  padding: 20px;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 5px;
+  font-size: 1.2em;
+}
+
+/* Button styling */
 button {
+  display: inline-block;
   padding: 10px 20px;
   margin: 10px;
+  background: #007BFF;
   border: none;
+  color: #fff;
+  font-size: 1em;
   border-radius: 5px;
-  background-color: #4CAF50;
-  color: white;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 button:hover {
-  background-color: #45a049;
+  background: #0056b3;
 }
 
-input {
+/* Form input styling */
+input[type="text"] {
   padding: 10px;
-  margin: 5px;
+  margin: 10px 5px;
+  width: calc(50% - 20px);
   border: 1px solid #ddd;
   border-radius: 5px;
-  width: calc(100% - 22px);
-}
-
-div {
-  width: 100%;
-  max-width: 400px;
+  font-size: 1em;
 }
